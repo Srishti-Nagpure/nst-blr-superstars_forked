@@ -19,6 +19,26 @@ app.use(limiter);
 // Middleware to serve static files
 app.use(express.static('public'));
 
+// Utility function to calculate contrast and determine text color
+function getContrastColor(hexColor) {
+  // Default to white if no color provided
+  if (!hexColor) return '#ffffff';
+  
+  // Remove # if present
+  hexColor = hexColor.replace('#', '');
+  
+  // Convert to RGB
+  const r = parseInt(hexColor.substr(0, 2), 16);
+  const g = parseInt(hexColor.substr(2, 2), 16);
+  const b = parseInt(hexColor.substr(4, 2), 16);
+  
+  // Calculate relative luminance using WCAG formula
+  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+  
+  // Return black for light backgrounds, white for dark backgrounds
+  return luminance > 0.5 ? '#000000' : '#ffffff';
+}
+
 // Route 1: GET / - Displays HTML with list of files
 app.get('/', (req, res) => {
   const dataDir = path.join(__dirname, 'data');
@@ -152,6 +172,20 @@ app.get('/:username', (req, res) => {
     
     try {
       const userData = JSON.parse(data);
+      
+      // Get customization options or use defaults
+      const customization = userData.customization || {};
+      const backgroundColor = customization.backgroundColor || '#f5f5f5';
+      const backgroundImage = customization.backgroundImage || '';
+      const profileImage = customization.profileImage || '';
+      const textColor = getContrastColor(backgroundColor);
+      
+      // Build background style
+      let backgroundStyle = `background-color: ${backgroundColor};`;
+      if (backgroundImage) {
+        backgroundStyle += ` background-image: url('${backgroundImage}'); background-size: cover; background-position: center; background-attachment: fixed;`;
+      }
+      
       const html = `
         <!DOCTYPE html>
         <html lang="en">
@@ -165,12 +199,28 @@ app.get('/:username', (req, res) => {
               max-width: 800px;
               margin: 50px auto;
               padding: 20px;
-              background-color: #f5f5f5;
+              ${backgroundStyle}
+              color: ${textColor};
+              min-height: 100vh;
             }
             .profile-card {
-              background-color: white;
+              background-color: rgba(255, 255, 255, 0.95);
               padding: 30px;
               border-radius: 10px;
+              box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+              color: #333;
+            }
+            .profile-header {
+              text-align: center;
+              margin-bottom: 30px;
+            }
+            .profile-image {
+              width: 150px;
+              height: 150px;
+              border-radius: 50%;
+              object-fit: cover;
+              margin-bottom: 20px;
+              border: 4px solid #fff;
               box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             }
             h1 {
@@ -189,6 +239,7 @@ app.get('/:username', (req, res) => {
               margin-top: 20px;
               color: #007bff;
               text-decoration: none;
+              font-weight: bold;
             }
             .back-link:hover {
               text-decoration: underline;
@@ -197,7 +248,10 @@ app.get('/:username', (req, res) => {
         </head>
         <body>
           <div class="profile-card">
-            <h1>${userData.name || username}</h1>
+            <div class="profile-header">
+              ${profileImage ? `<img src="${profileImage}" alt="${userData.name || username}" class="profile-image">` : ''}
+              <h1>${userData.name || username}</h1>
+            </div>
             ${userData.username ? `<div class="profile-field"><span class="profile-label">Username:</span> ${userData.username}</div>` : ''}
             ${userData.email ? `<div class="profile-field"><span class="profile-label">Email:</span> ${userData.email}</div>` : ''}
             ${userData.bio ? `<div class="profile-field"><span class="profile-label">Bio:</span> ${userData.bio}</div>` : ''}

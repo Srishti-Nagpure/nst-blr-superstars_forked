@@ -1,0 +1,12 @@
+{
+  "username": "alice",
+  "name": "Alice Johnson",
+  "email": "alice@example.com",
+  "bio": "Full-stack developer passionate about creating beautiful user experiences",
+  "location": "Bangalore, India",
+  "customization": {
+    "backgroundColor": "#1a1a2e",
+    "backgroundImage": "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=1200",
+    "profileImage": "https://via.placeholder.com/150/0891b2/ffffff?text=AJ"
+  }
+}
