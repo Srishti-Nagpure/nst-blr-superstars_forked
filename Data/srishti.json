@@ -1,0 +1,18 @@
+{
+  "username": "alice",
+  "name": "alice in the wonderland",
+  "email": "alice@pixelmagic.dev",
+  "bio": "Turning coffee into code since 2025 ☕️→💻",
+  "location": "Bangalore, India",
+  "favoriteColor": "nothing particular",
+  "favoriteGame": "",
+  "hobbies": "reading novels,webtoons,watching anime,DO NOTHING",
+  "superpower": "being able to create and transmigrate into any world",
+  "favoriteSnack": "Maggieeeee...",
+  "funFact": "",
+  "customization": {
+    "backgroundColor": "pink",
+    "backgroundImage": "",
+    "profileImage": ""
+  }
+}
