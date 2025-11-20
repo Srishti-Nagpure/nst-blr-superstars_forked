@@ -1,17 +1,17 @@
 {
-  "username": "alice",
-  "name": "Alice the Pixel Wizard",
+  "username": "Srishti",
+  "name": "Srishti",
   "email": "alice@pixelmagic.dev",
-  "bio": "Turning coffee into code since 2020 ☕️→💻",
+  "bio": "just starting T_T ",
   "location": "Bangalore, India",
-  "favoriteColor": "Teal",
-  "favoriteGame": "Minecraft - I'm a redstone engineer 🔴",
-  "hobbies": "Photography, gardening succulents, binge-watching anime",
-  "superpower": "Naming variables perfectly on the first try",
-  "favoriteSnack": "Samosas and masala chai",
-  "funFact": "I have a collection of 47 different mechanical keyboards!",
+  "favoriteColor": "nothing in particular",
+  "favoriteGame": "Among us",
+  "hobbies": "reading novel,watching anime",
+  "superpower": "transmigration",
+  "favoriteSnack": "maggieee...",
+  "funFact": "kuch bhi nii >_< ",
   "customization": {
-    "backgroundColor": "teal",
+    "backgroundColor": "blue",
     "backgroundImage": "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=1200",
     "profileImage": "https://api.dicebear.com/7.x/avataaars/svg?seed=Alice"
   }
